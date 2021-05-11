@@ -1,0 +1,80 @@
+<html><head></head><body>{% extends 'page0_base.html' %} {%load static%} {%block content%} 
+{%for i,j in l%}
+<br><br>
+<div class="post-post">
+  <div class="post-details">
+    <div class="post-details-name">{{i.userid}},{{i.id}}</div>
+    <div class="post-details-others" id="post-details-designation" style="width: 70px!important;padding-right:8px!important;">{{j.designation}}</div>
+    <div class="post-details-others" id="post-details-department" style="width:70px!important;margin-right:40px;">{{j.department}}</div>
+
+    <div class="post-details-others" id="post-details-date">{{i.date}}</div>
+    {%if present_user in i.likediff%}
+    <!-- {% comment %} <style>
+      .post-upvotes-icon {
+        color: red;
+      }
+
+    </style> {% endcomment %}
+    {% comment %} <h3>hello</h3> {% endcomment %} -->
+    <button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}" style="color:red;"><i class="fas fa-level-up-alt"></i>
+  
+    {%else%}
+    
+    <!-- {% comment %} <style>
+      .post-upvotes-icon {
+        color: white;
+      }
+    </style> {% endcomment %} -->
+    </button><button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}" style="color:white;"><i class="fas fa-level-up-alt"></i>
+  
+    {%endif%} 
+    
+    <!-- {% comment %} </button><button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}"><i class="fas fa-level-up-alt"></i>
+   {% endcomment %}
+     -->
+      
+    </button>
+    <div class="post-upvotes-count lc{{i.id}}" id="votecount">{{i.likecount}}</div>
+    <img class="post-details-image" src="/media/{{j.display_picture}}">
+  </div>
+ 
+  <div class="post-content">
+ {%if i.image%}
+    <img class="post-content-image" src="/media/{{i.image}}">
+    <div>{{i.message}}</div>
+  {%else%}
+    <img class="post-content-image" src="{% static 'default_image.jfif'%}">
+    <div>{{i.message}}</div>
+  {%endif%}
+  </div>
+</div>
+
+{%endfor%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script>
+  $(".post-upvotes-icon").click(function () {
+    console.log("hello");
+    var color = $(this).css("color");
+    if (color == "rgb(255, 0, 0)") {
+      $(this).css("color", "white");
+      var postid = $(this).attr("data-catid");
+      console.log(postid);
+      console.log(1);
+      $.get("/downvote/", { post_id: postid }, function (data) {
+        $(`.lc${postid}`).html(data);
+      });
+    } else {
+      $(this).css("color", "red");
+      var postid = $(this).attr("data-catid");
+      console.log(postid);
+      console.log(2);
+      $.get("/upvote/", { post_id: postid }, function (data) {
+        $(`.lc${postid}`).html(data);
+      });
+    }
+  });
+</script>
+
+{%endblock content%}
+</body></html>

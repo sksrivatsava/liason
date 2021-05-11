@@ -1,0 +1,82 @@
+{% extends 'page0_base.html' %} {%load static%} {%block content%} 
+
+<div class="but">
+        <div class="container justify-content-center">
+        <h1 class="post-heading ">Settings</h1>
+{{error}}
+        <div class=" btn-group  flex-wrap " style="margin-top: 10px; margin-left:90px;" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('user','pp','pw','ac')">Change Username</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('pp','user','pw','ac')">Change Profile Picture</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('pw','pp','user','ac')">Change Password</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('ac','pp','pw','user')">Change AccountType</button>
+          </div>
+        
+
+        <div id="user" style="display: none;">
+            <form action="/change_username/" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">USERNAME:</label>
+                    <input type="text" name="uname" class="form-control" id="exampleFormControlTextarea1" >
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+        </div>
+        <div id="pp" style="display: none;">
+            <form method="POST" action="/change_profile_photo/" enctype="multipart/form-data" >
+        {% csrf_token %}
+              <div class="form-group create-post-box">
+                <label for="fileUpload">Choose an image to upload!</label>
+                <br>
+                <input type="file" id="fileUpload" name="display_picture">
+              </div>
+      
+            <button type="submit" class="btn btn-success create-post-box">Submit</button>
+          </form>
+
+        </div>
+        <div id="pw" style="display: none;">
+            <form action="/change_password/" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">OLD PASSWORD:</label>
+                    <input type="password" class="form-control" name= "op" id="exampleFormControlTextarea1" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">NEW PASSWORD:</label>
+                    <input type="password" class="form-control" name = "np" id="exampleFormControlTextarea1" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">CONFRIM PASSWORD:</label>
+                    <input type="password" class="form-control" name = "cp" id="exampleFormControlTextarea1" >
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+        </div>
+        <div id="ac" style="display: none;">
+            <h1>Your account is {{u.acctype}}.</h1>
+            {%if u.acctype == 'Public'%}
+            <button type="submit" class="btn btn-info" onclick='location.href="/change_account_type/"'>Change To Private</button>
+            {%else%}
+             <button type="submit" class="btn btn-info" onclick='location.href="/change_account_type/"'>Change To Public</button>
+            {%endif%}
+
+        </div>
+    </div>
+</div>
+<script>
+    function show(shown, hidden1,hidden2,hidden3) {
+        document.getElementById(shown).style.display='block';
+        document.getElementById(hidden1).style.display='none';
+        document.getElementById(hidden2).style.display='none';
+        document.getElementById(hidden3).style.display='none';
+        
+
+        return false;
+      }
+</script>
+{%endblock content%}
