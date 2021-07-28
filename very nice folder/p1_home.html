@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+   <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="p1_home.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg homenav">` 
+  <a class="navbar-brand apro-navbar-text" href="#">LOGO</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item apro-navbar-text">
+                <a class="nav-link" href="#">Welcome Dummy User</a>
+            </li>
+        </ul>
+</nav>
+
+<button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                
+            </button> 
+    
+
+    <div class="wrapper">
+        <nav id="sidebar">
+        <ul class="list-unstyled components">
+        
+            <li class="active">
+                <i class="fas fa-home homeicon" data-toggle="collapse" ></i>
+            </li>
+            <li>
+               <i class="fas fa-user-plus homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-edit homeicon"></i>
+            </li>
+                <i class="fas fa-bell homeicon"></i>
+            <li>
+                <i class="fas fa-address-card homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-sliders-h homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-door-open homeicon"></i>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+    <h1 class="post-heading">News Feed</h1>
+    <div class="post-post">
+    <div class="post-details">
+        <div class="post-details-name">Dr.Corona Varanasi</div>
+        <div class="post-details-others" id="post-details-designation">HoD</div>
+        <div class="post-details-others" id="post-details-department">CSE</div>
+         <div class="post-details-others" id="post-details-date">09:18 PM, 13/01/2021</div>
+        <div class="post-upvotes-icon"><i class="fas fa-level-up-alt"></i></div>
+        <div class="post-upvotes-count">20</div>
+        <img class="post-details-image" src="C:\Users\Pranav\Pictures\nice wallpaper.jpg">
+    </div>
+    <div class="post-content">
+        <img class="post-content-image" src="C:\Users\Pranav\Pictures\BITS Internship Drive.jpg">
+    </div> 
+    </div>
+
+    <br>
+    <br>
+    <div class="post-post">
+    <div class="post-details">
+        <div class="post-details-name">Dr.Corona Varanasi</div>
+        <div class="post-details-others" id="post-details-designation">HoD</div>
+        <div class="post-details-others" id="post-details-department">CSE</div>
+         <div class="post-details-others" id="post-details-date">09:18 PM, 13/01/2021</div>
+        <div class="post-upvotes-icon"><i class="fas fa-level-up-alt"></i></div>
+        <div class="post-upvotes-count">20</div>
+        <img class="post-details-image" src="C:\Users\Pranav\Pictures\sandeepmeme3.png">
+    </div>
+    <div class="post-content">
+        <img class="post-content-image" src="C:\Users\Pranav\Pictures\WhatsApp Image 2020-03-02 at 8.05.24 PM.jpeg">
+    </div> 
+    </div>
+
+    <br>
+
+</div>
+
+</div>      
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+ 
+});
+    </script>
+</body>
+
+</html>

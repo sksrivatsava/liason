@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{%load static%}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Liaison</title>
+   <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="p1_home.css">
+    <link rel="stylesheet" href="{% static 'page0_base.css'%}">
+     {%block nicestyle%}
+     {%endblock nicestyle%}
+   
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    
+</head>
+
+<body>
+
+
+    <nav class="navbar fixed-top navbar-expand-lg homenav">
+  <a class="navbar-brand apro-navbar-text"><img src=""></a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item apro-navbar-text">
+                <a class="nav-link" href="#">Welcome, {{u.username}}</a>
+            </li>
+        </ul>
+</nav>
+
+<button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                
+            </button> 
+    
+
+    <div class="wrapper">
+        <nav id="sidebar">
+        <ul class="list-unstyled components">
+        
+            <li class="active">
+                <button class="navbar-button tooltip-class" onclick='location.href="{% url 'home' %}"'>
+                <i class="fas fa-home homeicon" data-toggle="collapse" title="Home"></i>
+                </button>
+            </li>
+            <li>
+               <button class="navbar-button tooltip-class" onclick='location.href="{% url 'friends' %}"'>
+                   <i class="fas fa-user-plus homeicon" title="Display Friends"></i>
+                </button>
+            </li>
+            
+            <li>
+                <button class="navbar-button tooltip-class" onclick='location.href="{% url 'create_post' %}"'>
+                   <i class="fas fa-edit homeicon" title="Create a New Post"></i>
+                </button>
+            </li>
+            {% if u.acctype == "Private" %}
+                {% comment %} <h1>hello</h1> {% endcomment %}
+                <li>
+                        {% if u.foll_req == '' %}
+
+                        <button class="navbar-button tooltip-class" onclick='location.href="/page6_follow_requests"'>
+                        <i class="fas fa-bell homeicon" title="Follow Requests"></i>
+                        {% else %}
+                         <button class="navbar-button tooltip-class" onclick='location.href="/page6_follow_requests"'>
+                        <i style="color:red;" title="Follow Requests" class="fas fa-bell homeicon"></i>
+                        {% endif %}
+
+                </li>
+            {% endif %}
+                
+            <li>
+                 <button class="navbar-button tooltip-class" onclick='location.href="/page8_profile/{{present_user}}/"'>
+                <i title="Address" class="fas fa-address-card homeicon"></i>
+                </button>
+            </li>
+            <li>
+                 <button class="navbar-button tooltip-class" onclick='location.href="/settings/"'>
+              <span title="Settings" class="tooltiptext"><i class="fas fa-sliders-h homeicon"></i></span>
+                </button>
+                
+            </li>
+            <li>
+                 <button class="navbar-button tooltip-class" onclick='location.href="/logout/"'>
+                
+                <span title="Logout" class="tooltiptext"><i class="fas fa-door-open homeicon"></i></span>
+                </button>
+             
+            </li>
+
+            
+        <!-- <a href="/page3_register">Register</a>
+        <a href="/page4_login">Login</a>
+        <a href="/page5_following">Following</a> -->
+
+        </ul>
+    </nav>
+    </div>
+
+    <style>
+        .navbar-button
+    {
+    background-color:inherit;
+    border:none;
+    }
+
+    .navbar-button:focus
+    {
+       outline:none;
+    }
+
+    
+
+
+    </style>
+
+    <!-- Page Content -->
+    <div id="content">
+    {%block content%}
+    {%endblock content%}
+
+</div>
+
+      
+     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <if you uncomment the above script src, ajax doesn't work because using slim min js raises an error $ is not defined.> -->
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+ 
+});
+    </script>
+</body>
+
+</html>

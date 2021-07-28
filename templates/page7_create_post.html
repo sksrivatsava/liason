@@ -1,0 +1,29 @@
+{%extends 'page0_base.html'%}
+{%load static%}
+
+{%block content%}
+
+<link rel="stylesheet" href="{%static 'page7_create_post.css'%}"
+        <div class="container justify-content-center for">
+            <h1 class="post-heading for create-post-box">New Post</h1>
+       <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-group create-post-box">
+                <label for="e">Type your message here..</label>
+                <textarea class="form-control" id="e" rows="3" name="message"></textarea>
+              </div>
+              <div class="form-group create-post-box">
+                <label for="fileUpload">Choose an image to upload!</label>
+                <br>
+                <input type="file" id="fileUpload" name="image">
+              </div>
+      
+            <button type="submit" class="btn btn-success create-post-box">Submit</button>
+          </form>
+        </div>
+
+{%endblock content%}
+
+
+
+

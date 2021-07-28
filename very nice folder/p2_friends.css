@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'Whitney Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Whitney Medium'), url('whitneymedium.woff') format('woff');
+}
+
+body {
+    font-family: 'Whitney Medium';
+    background: #333333;
+}
+
+
+.friend-button
+{
+    margin-left:30px;
+    width:60px!important;
+    background-color:#333333;
+    border-color: #333333;
+    
+}
+
+.friend-button:hover
+{
+    background-color:#333333;
+    border-color: #333333;
+}
+
+.homeicon
+{
+    font-size:26px;
+    color:#2EA466;
+}
+
+.friend-name-style
+{
+    color:white;
+    letter-spacing:0.3mm;
+    font-size:16px;
+ 
+}
+
+.friend-designation-style
+{
+    background-color: rgb(176, 212, 16);
+    margin-bottom:5px;
+    padding-bottom:5px;
+   
+    width:60px;
+    height:20px;
+    text-align: center;
+    font-size:13px;
+    border: 1px solid whitesmoke;
+}
+
+.friend-department-style {
+    background-color: rgb(123, 182, 206);
+    margin-bottom:5px;
+    padding-bottom:5px;
+    width:60px;
+    height:20px;
+    text-align: center;
+    font-size:13px;
+    border: 1px solid whitesmoke;
+    
+}

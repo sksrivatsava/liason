@@ -1,0 +1,163 @@
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'page3_register.css'%}">
+
+
+</head>
+
+<body>
+  
+                    
+
+    <video id="videoBG" autoplay muted loop>
+    <source src="{% static 'home_video.mp4'%}" type="video/mp4">
+</video>
+    <div class="container">
+        <div id="main">
+
+            <div class="box" style="top:450px!important;">
+                <h2>Register</h2>
+
+                {%if error%}
+
+                        <h4 style="color:white;">{{error}}</h4>
+                    
+
+                {%else%}
+                    <h4 style="color:white; font-weight:normal;">Ensure that your user id does not comprise of any spaces!</h4>
+                 {%endif%}       
+                <form action="{%url 'register' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="inputBox">
+                        <input type="text" name="name" required="true">
+                        <label>First Name</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="text" name="uname" required="true">
+                        <label>User ID</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="password" name="init_pwd" required="true">
+                        <label>Password</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <input type="password" name="conf_pwd" required="true">
+                         <label>Confirm Password</label>
+                    </div>
+
+                    <div class="inputBox">
+                        <label id="account-label">Type of Account</label>
+                        <input type="text" name="acctype" list="account_choices" required="true">
+                        <datalist id="account_choices">
+                            <option value="Public"></option>
+                            <option value="Private"></option>
+                        </datalist>
+
+                    </div>
+
+                    <div class="inputBox">
+                        <label id="department-label" style="display:block;">Department</label>
+                        <input type="text" name="department" list="department_choices" required="true">
+                        <datalist id="department_choices">
+                            <option value=''></option>
+                            <option value='Admin'></option>
+                            <option value='Transport'></option>
+                            <option value='Exam'></option>
+                            <option value='Placements'></option>
+                            <option value='Library'></option>
+                            <option value='First Year'></option>
+                            <option value='CSE'></option>
+                            <option value='EEE'></option>
+                            <option value='ECE'></option>
+                            <option value='IT'></option>
+                            <option value='MECH'></option>
+                            <option value='CIVIL'></option>
+                            <option value='MBA'></option>
+                            <option value='MTECH'></option>
+                        </datalist>
+
+                    </div>
+
+                    <div class="inputBox">
+                        <label id="designation-label">Designation</label>
+                        <input type="text" name="designation" list="designation_choices" required="true">
+                        <datalist id="designation_choices">
+                            <option value="Director"></option>
+                            <option value="Principal"></option>
+                            <option value="Dean"></option>
+                            <option value="HoD"></option>
+                            <option value="Assoc. HoD"></option>
+                            <option value="Prof."></option>
+                            <option value="Assoc. Prof."></option>
+                            <option value="Asst. Prof."></option>
+                            <option value="Lab"></option>
+                            <option value="Incharge"></option>
+
+                        </datalist>
+
+                    </div>
+                    <input type="submit" class="btn register-button" value="Submit">
+
+                      <div style="color:white;margin-top:10px;"> Existing User? 
+                         <button class="btn btn-sm btn-primary w-100 ml-2" 
+                         style="background-color: #2EA466;
+                         font-family:Whitney;
+                         font-size:12px;
+                         color:white;
+                         border-radius:5px;
+                         padding:10px;
+                         border:none;
+                         margin-left:12px;"
+                         onclick = 'location.href ="/page4_login/"' onmouseover="this.style.backgroundcolor='#64FF13'">Sign In</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>
+<!-- 
+<html>
+    <head>
+        Registration Page.
+    </head>
+
+    <body>
+        {%if error%}
+        <h4>{{error}}</h4>
+        {%endif%}
+    
+    <h2>Please sign up here!</h2>
+    <div class='container'>
+    <form method="POST" action="{%url 'register' %}">
+        
+    <table style="border-spacing: 0 15px;border-collapse:separate">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Full Name">
+       
+     
+   
+       
+       
+
+        
+    </table>
+   
+        </form>
+    </div>
+    
+</body>
+
+</html>
+ -->

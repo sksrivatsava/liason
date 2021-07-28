@@ -1,0 +1,465 @@
+{%extends 'page0_base.html'%}
+{%load static%}
+
+{%block content%}
+<link rel="stylesheet" href="{%static 'page8_profile.css'%}">
+
+
+{% if p_user == present_user %}
+	<div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-2" style="background-color: #333333;">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{u.display_picture}}/" class="rounded" width="95"> </div>
+                    <div class="ml-3 w-100">
+                        <h4 class="mb-0 mt-0" style="color: white;">{{p_user}}</h4> <span style="color: white;">{{u.department}},{{u.designation}}</span>
+                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats" style="color: #333333;">
+                            <div class="d-flex flex-column" onclick="return show('foll','fow','posts');"> <span class="articles">Following</span> <span class="number1">{{ln1}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('fow','foll','posts');"> <span class="followers">Followers</span> <span class="number2">{{ln2}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('posts','fow','foll');"> <span class="rating">Posts</span> <span class="number3">{{ln3}}</span> </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+		<div id="foll" style="display:none;" >
+
+	{% for i in l1 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Requested</button>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Following</button>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+
+		<div id="fow" style="display:none;" >
+		<div> followers </div>
+	{% for i in l2 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Requested</button>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Following</button>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+	<div id="posts"> 
+        <div id="post-h" style="margin-left:100px;">Posts</div> 
+	{%for i in l3%}
+		  <div class="post-post">
+    <div class="post-details">
+        
+        <div class="post-details-name">{{i.userid}}</div>
+        <div class="post-details-others" id="post-details-designation">{{a.designation}}</div>
+        <div class="post-details-others" id="post-details-department">{{a.department}}</div>
+        
+        <div class="post-details-others" id="post-details-date">{{i.date}}</div>
+        {%if present_user in i.likediff%}
+            <style>
+            #upvote{
+                background-color:red;
+            }
+            </style>
+            {%else%}
+            <style>
+            #upvote{
+                background-color:white;
+            }
+            </style>
+            {%endif%}
+         <!-- <div class="post-upvotes-icon" id-="upvote" data-catid="{{i.id}}"><i class="fas fa-level-up-alt"></i></div> -->
+         <button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}" disabled><i class="fas fa-level-up-alt"></i></button>
+        <div class="post-upvotes-count" id="votecount">{{i.likecount}}</div>
+        <img class="post-details-image" src="/media/{{a.display_picture}}">
+    </div>
+    <div class="post-content">
+        <img class="post-content-image" src="/media/{{i.image}}">
+    </div> 
+    </div>
+        
+	{% endfor %}
+</div>
+
+
+
+	{%elif present_user in a.followers %}
+	
+	<div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{a.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-3 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{a.userid}}</h4> <span style="color: #000;">{{a.department}},{{a.designation}}</span>
+                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                            <div class="d-flex flex-column" onclick="return show('foll','fow','posts');"> <span class="articles">Following</span> <span class="number1">{{ln1}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('fow','foll','posts');"> <span class="followers">Followers</span> <span class="number2">{{ln2}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('posts','fow','foll');"> <span class="rating">POSTS</span> <span class="number3">{{ln3}}</span> </div>
+                        </div>
+                        <div class="button mt-2 d-flex flex-row align-items-center"> <a href="/uf/{{a.userid}}" class="btn btn-sm btn-primary w-100 ml-2">Unfollow</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+		<div id="foll" style="display:none;" >
+		<div> following </div>
+	{% for i in l1 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Requested</button>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<a class="btn btn-sm btn-primary w-100 ml-2" href="#" disabled>Following</a>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+
+		<div id="fow" style="display:none;" >
+		<div> followers </div>
+	{% for i in l2 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<a class="btn btn-sm btn-primary w-100 ml-2" href="#" disabled>Requested</a>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Following</button>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+	<div id="posts"> Posts 
+	{%for i in l3%}
+		  <div class="post-post">
+    <div class="post-details">
+        
+        <div class="post-details-name">{{i.userid}}</div>
+        <div class="post-details-others" id="post-details-designation">{{a.designation}}</div>
+        <div class="post-details-others" id="post-details-department">{{a.department}}</div>
+        
+        <div class="post-details-others" id="post-details-date">{{i.date}}</div>
+        {%if present_user in i.likediff%}
+            <style>
+            #upvote{
+                background-color:red;
+            }
+            </style>
+            {%else%}
+            <style>
+            #upvote{
+                background-color:white;
+            }
+            </style>
+            {%endif%}
+         <!-- <div class="post-upvotes-icon" id-="upvote" data-catid="{{i.id}}"><i class="fas fa-level-up-alt"></i></div> -->
+         <button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}" disabled><i class="fas fa-level-up-alt"></i></button>
+        <div class="post-upvotes-count" id="votecount">{{i.likecount}}</div>
+        <img class="post-details-image" src="/media/{{a.display_picture}}">
+    </div>
+    <div class="post-content">
+        <img class="post-content-image" src="/media/{{i.image}}">
+    </div> 
+    </div>
+        
+	{% endfor %}
+</div>
+
+
+
+
+{% elif a.acctype == "Public" %}
+		<div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{a.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-3 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{a.user_id}}</h4> <span style="color: #000;">{{a.department}},{{a.designation}}</span>
+                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                            <div class="d-flex flex-column" onclick="return show('foll','fow','posts');"> <span class="articles">Following</span> <span class="number1">{{ln1}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('fow','foll','posts');"> <span class="followers">Followers</span> <span class="number2">{{ln2}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('posts','fow','foll');"> <span class="rating">POSTS</span> <span class="number3">{{ln3}}</span> </div>
+                        </div>
+                        <div class="button mt-2 d-flex flex-row align-items-center"> <a href="/f/{{a.userid}}" class="btn btn-sm btn-primary w-100 ml-2">Follow</a> </div>
+						<div>{{a.userid}}</div>
+					</div>
+                </div>
+            </div>
+        </div>
+	
+		<div id="foll" style="display:none;" >
+		<div> following </div>
+	{% for i in l1 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<a class="btn btn-sm btn-primary w-100 ml-2" href="#" disabled>Requested</a>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<a class="btn btn-sm btn-primary w-100 ml-2" href="#" disabled>Following</a>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+
+		<div id="fow" style="display:none;" >
+		<div> followers </div>
+	{% for i in l2 %}
+	
+	
+	<div class="container mt-5 d-flex justify-content-center outer">
+            <div class="card1 p-3">
+                <div class="d-flex align-items-center">
+                    <div > <img class="image" src="/media/{{i.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-1 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{i.userid}}</h4> <span style="color: #000;">{{i.department}},{{i.designation}}</span>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+								{%if present_user == i.userid%}
+		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>You</button>
+	{% else %}
+        	{%if present_user not in i.followers%}
+            		{%if i.acctype == 'Public'%}
+                	<a class="btn btn-sm btn-primary w-100 ml-2" href="/f/{{i.userid}}">Follow</a>
+            		{%elif present_user in i.foll_req%}
+                		<a class="btn btn-sm btn-primary w-100 ml-2" href="#" disabled>Requested</a>
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{i.userid}}">Request To Follow</a>	
+            		{%endif%}
+        	{%else%}
+            		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Following</button>	
+        	{%endif%}
+		
+	{%endif%}
+							
+						
+							<a class="btn btn-sm btn-primary w-100 ml-2" href="/page8_profile/{{i.userid}}/">See Profile</a>	
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+
+    {% endfor %}
+	</div>
+
+	<div id="posts"> Posts 
+	{%for i in l3%}
+		  <div class="post-post">
+    <div class="post-details">
+        
+        <div class="post-details-name">{{i.userid}}</div>
+        <div class="post-details-others" id="post-details-designation">{{a.designation}}</div>
+        <div class="post-details-others" id="post-details-department">{{a.department}}</div>
+        
+        <div class="post-details-others" id="post-details-date">{{i.date}}</div>
+        {%if present_user in i.likediff%}
+            <style>
+            #upvote{
+                background-color:red;
+            }
+            </style>
+            {%else%}
+            <style>
+            #upvote{
+                background-color:white;
+            }
+            </style>
+            {%endif%}
+         <!-- <div class="post-upvotes-icon" id-="upvote" data-catid="{{i.id}}"><i class="fas fa-level-up-alt"></i></div> -->
+         <button class="post-upvotes-icon" id="upvote" data-catid="{{i.id}}" disabled><i class="fas fa-level-up-alt"></i></button>
+        <div class="post-upvotes-count" id="votecount">{{i.likecount}}</div>
+        <img class="post-details-image" src="/media/{{a.display_picture}}">
+    </div>
+    <div class="post-content">
+        <img class="post-content-image" src="/media/{{i.image}}">
+    </div> 
+    </div>
+        
+	{% endfor %}
+</div>
+
+	
+
+{% else %}
+	<div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div> <img class="image" src="/media/{{a.display_picture}}/" class="rounded" width="155"> </div>
+                    <div class="ml-3 w-100">
+                        <h4 class="mb-0 mt-0" style="color: #000;">{{a.user_id}}</h4> <span style="color: #000;">{{a.department}},{{a.designation}}</span>
+                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                            <div class="d-flex flex-column" onclick="return show('foll','fow','posts');"> <span class="articles">Following</span> <span class="number1">{{ln1}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('fow','foll','posts');"> <span class="followers">Followers</span> <span class="number2">{{ln2}}</span> </div>
+                            <div class="d-flex flex-column" onclick="return show('posts','fow','foll');"> <span class="rating">POSTS</span> <span class="number3">{{ln3}}</span> </div>
+                        </div>
+						<div class="button mt-2 d-flex flex-row align-items-center"> 
+							{%if present_user in a.foll_req%}
+                		<button class="btn btn-sm btn-primary w-100 ml-2" disabled>Follow Requested</button> 
+            		{%else%}
+						<a class="btn btn-sm btn-primary w-100 ml-2" href="/frq/{{a.userid}}">Request To Follow</a>	
+						{%endif%}
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
+
+
+<script>
+        function show(shown, hidden1,hidden2) {
+            document.getElementById(shown).style.display='block';
+            document.getElementById(hidden1).style.display='none';
+            document.getElementById(hidden2).style.display='none';
+            return false;
+          }
+	</script>
+
+{%endblock content%}

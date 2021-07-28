@@ -1,0 +1,166 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+   <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="p1_home.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+   <style>
+       .but{
+           margin-top:80px;
+           /*width:500px;*/
+       }
+       #user,#pw,#pp,#ac{
+           /*width:500px;*/
+           margin-top:50px;
+           margin-left:90px;
+       }
+   </style> 
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg homenav">` 
+  <a class="navbar-brand apro-navbar-text" href="#">LOGO</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item apro-navbar-text">
+                <a class="nav-link" href="#">Welcome Dummy User</a>
+            </li>
+        </ul>
+</nav>
+
+<button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                
+            </button> 
+    
+
+    <div class="wrapper">
+        <nav id="sidebar">
+        <ul class="list-unstyled components">
+        
+            <li class="active">
+                <i class="fas fa-home homeicon" data-toggle="collapse" ></i>
+            </li>
+            <li>
+               <i class="fas fa-user-plus homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-edit homeicon"></i>
+            </li>
+                <i class="fas fa-bell homeicon"></i>
+            <li>
+                <i class="fas fa-address-card homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-sliders-h homeicon"></i>
+            </li>
+            <li>
+                <i class="fas fa-door-open homeicon"></i>
+            </li>
+
+        </ul>
+    </nav>
+    </div>
+
+    <!-- Page Content -->
+  
+    <div class="but">
+        <div class="container justify-content-center">
+        <h1 class="post-heading ">SETTINGS</h1>
+
+        <div class=" btn-group  flex-wrap " style="margin-top: 10px; margin-left:90px;" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('user','pp','pw','ac')">Change Username</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('pp','user','pw','ac')">Change Profile Picture</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('pw','pp','user','ac')">Change Password</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="return show('ac','pp','pw','user')">Change AccountType</button>
+          </div>
+        
+
+        <div id="user" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">USERNAME:</label>
+                    <input type="text" class="form-control" id="exampleFormControlTextarea1" >
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+        </div>
+        <div id="pp" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Example file input</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+        <div id="pw" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">OLD PASSWORD:</label>
+                    <input type="password" class="form-control" id="exampleFormControlTextarea1" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">NEW PASSWORD:</label>
+                    <input type="password" class="form-control" id="exampleFormControlTextarea1" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">CONFRIM PASSWORD:</label>
+                    <input type="password" class="form-control" id="exampleFormControlTextarea1" >
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+        </div>
+        <div id="ac" style="display: none;">
+            <h1>you are public</h1>
+            <button type="submit" class="btn btn-info">Change To Private</button>
+
+        </div>
+    </div>
+    </div>
+
+      
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+ 
+});
+    </script>
+    <script>
+        function show(shown, hidden1,hidden2,hidden3) {
+            document.getElementById(shown).style.display='block';
+            document.getElementById(hidden1).style.display='none';
+            document.getElementById(hidden2).style.display='none';
+            document.getElementById(hidden3).style.display='none';
+            
+
+            return false;
+          }
+    </script>
+</body>
+
+</html>
