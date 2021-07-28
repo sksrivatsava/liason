@@ -1,1 +1,1 @@
-web: gunicorn APRO.wsgi --log-file -
+web: gunicorn apro.wsgi --log-file -
